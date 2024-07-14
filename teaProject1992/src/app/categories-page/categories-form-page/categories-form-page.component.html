@@ -1,0 +1,75 @@
+<div class="page-title">
+  <h4>
+    <a
+      [routerLink]="['/categories']"
+    >Категории</a>
+    <i class="material-icons">keyboard_arrow_right</i>
+    {{isNew ? 'Добавить' : 'Редактировать'}} категорию
+  </h4>
+  <span>
+    <button class="btn btn-small red">
+      <i class="material-icons">delete</i>
+    </button>
+  </span>
+</div>
+
+<div class="row">
+  <form class="col s12 l6" [formGroup]="formCategory">
+    <div class="input-field">
+      <input
+        formControlName="name"
+        id="name"
+        type="text"
+        [ngClass]="{'invalid': formCategory.controls.name.invalid && formCategory.controls.name.touched}"
+      >
+      <label for="name">Название</label>
+      <span
+        class="helper-text red-text"
+        *ngIf="formCategory.controls.name.invalid && formCategory.controls.name.touched"
+      >
+        <span *ngIf="formCategory.controls.name.errors?.required">
+          Имя категории не может быть пустым.
+        </span>
+      </span>
+    </div>
+
+    <div>
+      <input
+        formControlName="img"
+        id="image-load" class="disnone" type="file"
+        (change)="onFileChange($event)"
+      >
+      <label
+        for="image-load"
+        type="button"
+        class="waves-effect waves-light btn blue-grey lighten-2 mb2">
+        <i class="material-icons left">backup</i>
+        Загрузить изображение
+      </label>
+    </div>
+
+    <div>
+      <button
+        type="submit"
+        [disabled]="formCategory.invalid || formCategory.disabled"
+        class="waves-effect waves-light btn"
+        (click)="submitCategory(data ,isNew)"
+      >
+        Сохранить изменения
+      </button>
+    </div>
+  </form>
+
+  <div class="col s12 l4 center">
+<!--    <i class="large material-icons">file_download</i>-->
+        <img class="responsive-img hight"
+             [src]="imagePreview"
+             *ngIf="imagePreview"
+        >
+  </div>
+</div>
+
+<!--<div class="position-block">-->
+<!--  <app-position-form-page></app-position-form-page>-->
+<!--</div>-->
+

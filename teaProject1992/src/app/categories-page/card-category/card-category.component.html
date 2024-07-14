@@ -1,0 +1,4 @@
+<div class="block_category" *ngIf="category" [routerLink]="['/categories', category.nike]">
+  <img class="category-img" src="{{category.img}}" alt="{{category.title}}">
+  <a class="collection-item">{{category.title}}</a>
+</div>
